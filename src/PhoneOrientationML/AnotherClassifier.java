@@ -1,15 +1,13 @@
 package PhoneOrientationML;
 
-import java.util.Vector;
+public class AnotherClassifier implements BaseClassifier {
 
-public class AnotherClassifier implements BaseClassifier{
-	
-	public void training(String fileName, Vector<Point> points) {
-		
+	public void training(String fileName) {
+		System.out.println("public void training(String fileName)");
 	}
-	
-	
-	public int predict(Vector<Point> point,int x, int y, int z) {
+
+	public int predict(Point inputPoint) {
+		System.out.println("public void training(String fileName)");
 		return 1;
 	}
 
