@@ -1,5 +1,10 @@
 package PhoneOrientationML;
 
+/**
+ * Points structure / class for the classifier to simplify things
+ * @author anthony
+ *
+ */
 public class Point {
 
 	/**

@@ -1,89 +1,67 @@
 package main;
 
-import java.io.*;
 import java.util.Scanner;
 
 import PhoneOrientationML.*;
 
 public class Main {
-	public static void unknownDataOption(NNClassifier inputClassifier) {
-		try {
-			File inputFile = new File("resources/unknownData.txt");
-			Scanner fileReader = new Scanner(inputFile);
-
-			while (fileReader.hasNextLine()) {
-				String data = fileReader.nextLine();
-				System.out.println("data: " + data);
-				String[] splitData = data.split(",");
-
-				double newX = Double.parseDouble(splitData[0]);
-				double newY = Double.parseDouble(splitData[1]);
-				double newZ = Double.parseDouble(splitData[2]);
-				Point newPoint = new Point(newX, newY, newZ);
-				int predictedOrientation = inputClassifier.predict(newPoint);
-				System.out.printf("Predicted Orientation: %d\n\n", predictedOrientation);
-			}
-
-			fileReader.close();
-
-		} catch (FileNotFoundException error) {
-			System.out.println("File Not Found Error.");
-			error.printStackTrace();
-		}
-	}
 
 	public static void main(String[] args) {
-		NNClassifier newClassifier = new NNClassifier();
+
+		NNClassifier newClassifier = new NNClassifier(); // classifier used in program
+
 		// first train data
-		newClassifier.training("resources/testingData.txt");
-		System.out.println("Training Complete...\n");
+		newClassifier.trainDataOption("resources/testingData.txt");
 
 		// then predict unknown file
-		unknownDataOption(newClassifier);
-		System.out.println("unknown data added to knowledge base...\n");
+		newClassifier.unknownDataOption("resources/unknownData.txt");
 
-		// input from user
+		// now input from user
 		Scanner inputScanner = new Scanner(System.in);
 		boolean continueLoop = true;
-		
-		while (continueLoop) {
+
+		while (continueLoop) { // keep looping until they exit...
 			double newX = 0;
 			double newY = 0;
 			double newZ = 0;
-			try {
+
+			try { // using try in case of weird input
 				String input;
 				System.out.println("Please enter an X coordinate: ");
 				input = inputScanner.nextLine();
-				if ("q".equals(input)) {
+				if ("q".equals(input)) {	//check if they want to exit
 					continueLoop = false;
 					break;
 				}
 				newX = Double.parseDouble(input);
-				
-				System.out.println("\n");
+
+//				System.out.println("\n");
 				System.out.println("Please enter an Y coordinate: ");
 				input = inputScanner.nextLine();
-				if ("q".equals(input)) {
+				if ("q".equals(input)) {	//check if they want to exit
 					continueLoop = false;
 					break;
 				}
 				newY = Double.parseDouble(input);
 
-				System.out.println("\n");
+//				System.out.println("\n");
 				System.out.println("Please enter an Z coordinate: ");
 				input = inputScanner.nextLine();
-				if ("q".equals(input)) {
+				if ("q".equals(input)) {	//check if they want to exit
 					continueLoop = false;
 					break;
 				}
 				newZ = Double.parseDouble(input);
 
-				
-			} catch (java.util.InputMismatchException error) {
-				System.out.println("Incorrect input, please try again");
+			} catch (java.lang.NumberFormatException error) {
+				System.out.println("Incorrect input, please try again\n\n");
 			}
-			
-			Point userPoint = new Point(newX, newY, newZ);
+
+			System.out.println("\n");
+
+			Point userPoint = new Point(newX, newY, newZ); // create point from user input
+
+			//print output for options
 			int outputPrediction = newClassifier.predict(userPoint);
 			String orientation = new String();
 			if (1 == outputPrediction) {
@@ -104,5 +82,7 @@ public class Main {
 
 			System.out.println("Phone Orientation = " + orientation + "\n");
 		}
+		//close scanner after no more inputs are needed
+		inputScanner.close();
 	}
 }

@@ -3,13 +3,16 @@ package PhoneOrientationML;
 import java.util.*;
 import java.io.*;
 
-public class NNClassifier implements BaseClassifier {
+public class NNClassifier extends BaseClassifier {
 
 	/**
 	 * knowledge base for ML "known points"
 	 */
 	ArrayList<Point> points;
 
+	/**
+	 * Constructor for NNClassifier, allocates array list
+	 */
 	public NNClassifier() {
 		this.points = new ArrayList<Point>();
 	}
@@ -22,9 +25,9 @@ public class NNClassifier implements BaseClassifier {
 			while (fileReader.hasNextLine()) {
 				String data = fileReader.nextLine();
 //				System.out.println("data: " + data);
-				String[] splitData = data.split(",");
+				String[] splitData = data.split(",");	//split on , into an array of 3
 
-				double newX = Double.parseDouble(splitData[0]);
+				double newX = Double.parseDouble(splitData[0]);	//parse inputs
 				double newY = Double.parseDouble(splitData[1]);
 				double newZ = Double.parseDouble(splitData[2]);
 				int newOrientation = Integer.parseInt(splitData[3]);
@@ -42,6 +45,10 @@ public class NNClassifier implements BaseClassifier {
 		}
 	}
 
+	/**
+	 * get point and compare to all in set
+	 * @param inputPoint
+	 */
 	private void getDistance(Point inputPoint) {
 		for (Point currentPoint : this.points) {
 			currentPoint.distance = Math.sqrt(Math.pow((currentPoint.xVal - inputPoint.xVal), 2)
@@ -51,11 +58,16 @@ public class NNClassifier implements BaseClassifier {
 		}
 	}
 
+	/**
+	 * sorts points for predict function and compare to each other by overriding comparator operator
+	 * @author anthony
+	 *
+	 */
 	private class sortPoints implements Comparator<Point> {
 
 		@Override
 		public int compare(Point a, Point b) {
-			return Double.compare(a.getDistance(),b.getDistance());
+			return Double.compare(a.getDistance(),b.getDistance());	//use built in compare for two doubles
 		}
 
 	}
