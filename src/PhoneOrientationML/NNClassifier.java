@@ -21,7 +21,7 @@ public class NNClassifier implements BaseClassifier {
 
 			while (fileReader.hasNextLine()) {
 				String data = fileReader.nextLine();
-				//System.out.println("data: " + data);
+//				System.out.println("data: " + data);
 				String[] splitData = data.split(",");
 
 				double newX = Double.parseDouble(splitData[0]);
@@ -30,7 +30,7 @@ public class NNClassifier implements BaseClassifier {
 				int newOrientation = Integer.parseInt(splitData[3]);
 
 				Point newPoint = new Point(newX, newY, newZ, newOrientation);
-				//System.out.printf("X: %f, Y: %f, Z: %f, Orientation: %d\n", newX, newY, newZ, newOrientation);
+//				System.out.printf("X: %f, Y: %f, Z: %f, Orientation: %d\n", newX, newY, newZ, newOrientation);
 				this.points.add(newPoint);
 			}
 
@@ -47,7 +47,7 @@ public class NNClassifier implements BaseClassifier {
 			currentPoint.distance = Math.sqrt(Math.pow((currentPoint.xVal - inputPoint.xVal), 2)
 					+ Math.pow((currentPoint.yVal - inputPoint.yVal), 2)
 					+ Math.pow((currentPoint.zVal - inputPoint.zVal), 2));
-			//System.out.printf("distance: %f\n", currentPoint.distance);
+//			System.out.printf("distance: %f\n", currentPoint.distance);
 		}
 	}
 
@@ -64,9 +64,9 @@ public class NNClassifier implements BaseClassifier {
 
 		this.getDistance(inputPoint);
 		Collections.sort(this.points, new sortPoints());
-		for(Point currentPoint:this.points) {
-			//System.out.printf("sortedDistance: %f\n",currentPoint.distance);
-		}
+//		for(Point currentPoint:this.points) {
+//			System.out.printf("sortedDistance: %f\n",currentPoint.distance);
+//		}
 		inputPoint.orientation = this.points.get(0).orientation;
 		return inputPoint.orientation;
 	}
