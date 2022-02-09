@@ -51,9 +51,9 @@ public class NNClassifier extends BaseClassifier {
 	 */
 	private void getDistance(Point inputPoint) {
 		for (Point currentPoint : this.points) {
-			currentPoint.distance = Math.sqrt(Math.pow((currentPoint.xVal - inputPoint.xVal), 2)
-					+ Math.pow((currentPoint.yVal - inputPoint.yVal), 2)
-					+ Math.pow((currentPoint.zVal - inputPoint.zVal), 2));
+			currentPoint.setDistance(Math.sqrt(Math.pow((currentPoint.getxVal() - inputPoint.getxVal()), 2)
+					+ Math.pow((currentPoint.getyVal() - inputPoint.getyVal()), 2)
+					+ Math.pow((currentPoint.getzVal() - inputPoint.getzVal()), 2)));
 //			System.out.printf("distance: %f\n", currentPoint.distance);
 		}
 	}
@@ -79,7 +79,7 @@ public class NNClassifier extends BaseClassifier {
 //		for(Point currentPoint:this.points) {
 //			System.out.printf("sortedDistance: %f\n",currentPoint.distance);
 //		}
-		inputPoint.orientation = this.points.get(0).orientation;
-		return inputPoint.orientation;
+		inputPoint.setOrientation(this.points.get(0).getOrientation());
+		return inputPoint.getOrientation();
 	}
 }
