@@ -10,11 +10,11 @@ public class Point {
 	/**
 	 * Values for a 3d point, plus orientation and distance for predicted / known
 	 */
-	double xVal;
-	double yVal;
-	double zVal;
-	int orientation;
-	double distance;
+	private double xVal;
+	private double yVal;
+	private double zVal;
+	private int orientation;
+	private double distance;
 
 	/**
 	 * default constructor zero values data
